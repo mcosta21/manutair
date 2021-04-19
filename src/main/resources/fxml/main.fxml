@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mcosta.controller.MainController">
+   <children>
+      <Pane prefHeight="70.0" prefWidth="1366.0" styleClass="header">
+         <children>
+            <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="1105.0" layoutY="15.0" prefHeight="17.0" prefWidth="235.0" styleClass="text" text="Username" textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="36.0" fitWidth="90.0" layoutX="23.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ManutAir.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblUserType" alignment="CENTER_RIGHT" layoutX="1087.0" layoutY="37.0" prefHeight="15.0" prefWidth="253.0" styleClass="text" text="Usertype" textAlignment="RIGHT">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <VBox fx:id="vboxx" alignment="TOP_CENTER" layoutX="61.0" layoutY="118.0" prefHeight="561.0" prefWidth="1241.0" spacing="20.0" />
+      <Pane layoutY="720.0" prefHeight="48.0" prefWidth="1366.0" styleClass="header">
+         <children>
+            <Button layoutX="1230.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="117.0" text="Sair" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

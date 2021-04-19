@@ -1,0 +1,8 @@
+<set>
+  <com.mcosta.domain.model.Physical>
+    <phone>27622460</phone>
+    <address>Rua 1</address>
+    <name>Marcio</name>
+    <cpf>14888140740</cpf>
+  </com.mcosta.domain.model.Physical>
+</set>

@@ -1,0 +1,9 @@
+<set>
+  <com.mcosta.domain.model.User>
+    <username>marcio</username>
+    <password>rerwer</password>
+    <name>Marcio da Silva Costa</name>
+    <isTechnician>false</isTechnician>
+    <userType>ATTENDANT</userType>
+  </com.mcosta.domain.model.User>
+</set>

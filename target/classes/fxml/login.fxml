@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mcosta.controller.LoginController">
+    <children>
+        <Label fx:id="lblMostrar" layoutX="516.0" layoutY="136.0" minHeight="16" minWidth="69" prefHeight="52.0" prefWidth="215.0" />
+      <Pane layoutX="387.0" layoutY="65.0" prefHeight="618.0" prefWidth="593.0" style="-fx-background-color: #fff;">
+         <children>
+              <Button layoutX="147.0" layoutY="524.0" onAction="#OnClickBackToPrimary" prefHeight="43.0" prefWidth="299.0" styleClass="toggle-button" text="Entrar" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,8 @@
+<set>
+  <com.mcosta.domain.model.Legal>
+    <phone>22222222</phone>
+    <address>Rua 2</address>
+    <companyName>Dimes</companyName>
+    <cnpj>02356895874225</cnpj>
+  </com.mcosta.domain.model.Legal>
+</set>

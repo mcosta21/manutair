@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mcosta.controller.ClientController">
+   <children>
+      <Pane prefHeight="70.0" prefWidth="1366.0" styleClass="header">
+         <children>
+            <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="1105.0" layoutY="15.0" prefHeight="17.0" prefWidth="235.0" styleClass="text" text="Username" textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="36.0" fitWidth="90.0" layoutX="23.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ManutAir.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblUserType" alignment="CENTER_RIGHT" layoutX="1087.0" layoutY="37.0" prefHeight="15.0" prefWidth="253.0" styleClass="text" text="Usertype" textAlignment="RIGHT">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="720.0" prefHeight="48.0" prefWidth="1366.0" styleClass="header">
+         <children>
+            <Button layoutX="1230.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="117.0" text="Sair" />
+            <Button layoutX="1106.0" layoutY="9.0" mnemonicParsing="false" onAction="#goHome" prefHeight="25.0" prefWidth="117.0" text="Inicio" />
+         </children>
+      </Pane>
+      <TabPane fx:id="tabPane" layoutY="70.0" prefHeight="650.0" prefWidth="1366.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Pessoas Físicas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="726.0">
+                     <children>
+                        <TableView fx:id="tableViewPhysical" layoutX="27.0" layoutY="23.0" prefHeight="555.0" prefWidth="1316.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Cadastrar Pessoa Física">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="229.0" layoutY="69.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="197.0" text="Nome Completo *" />
+                              <TextField fx:id="inputNamePhysical" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="229.0" layoutY="176.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="41.0" prefWidth="89.0" text="CPF *" />
+                              <TextField fx:id="inputCpfPhysical" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="229.0" layoutY="284.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="305.0" text="Telefone *" />
+                              <TextField fx:id="inputPhonePhysical" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                        <Button layoutX="938.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickSavePhysical" prefHeight="48.0" prefWidth="199.0" text="Salvar" />
+                        <VBox layoutX="229.0" layoutY="388.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="305.0" text="Endereço *" />
+                              <TextField fx:id="inputAddressPhysical" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Pessoas Juridicas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="726.0">
+                     <children>
+                        <TableView fx:id="tableViewLegal" layoutX="27.0" layoutY="23.0" prefHeight="555.0" prefWidth="1316.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Cadastrar Pessoa Juridica">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="229.0" layoutY="69.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="197.0" text="Razão Social *" />
+                              <TextField fx:id="inputCompanyNameLegal" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="229.0" layoutY="176.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="41.0" prefWidth="89.0" text="CNPJ *" />
+                              <TextField fx:id="inputCnpjLegal" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="229.0" layoutY="284.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="305.0" text="Telefone *" />
+                              <TextField fx:id="inputPhoneLegal" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                        <Button layoutX="938.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickSaveLegal" prefHeight="48.0" prefWidth="199.0" text="Salvar" />
+                        <VBox layoutX="229.0" layoutY="388.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="305.0" text="Endereço *" />
+                              <TextField fx:id="inputAddressLegal" prefHeight="49.0" prefWidth="449.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

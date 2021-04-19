@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../../resources/fonts/Inter-Medium.ttf');
+}
+
+.label {
+    -fx-font-family: 'Inter';
+    -fx-font-size: 20;
+}
+
+.button .text {
+    -fx-font-family: 'Inter';
+    -fx-font-weight: 900;
+}
