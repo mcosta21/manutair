@@ -1,0 +1,59 @@
+<set>
+  <com.mcosta.domain.model.Equipment>
+    <idEquipment>3</idEquipment>
+    <description>novo</description>
+    <brand>ettewe</brand>
+    <model>rewrwer</model>
+    <serialNumber>wer2342424</serialNumber>
+    <contract>
+      <idContract>1</idContract>
+      <effectiveStartDate>2021-04-20</effectiveStartDate>
+      <durationInMonths>7</durationInMonths>
+      <client class="com.mcosta.domain.model.Physical">
+        <idClient>1</idClient>
+        <phone>412414</phone>
+        <address>412141</address>
+        <name>Marcio</name>
+        <cpf>2431244</cpf>
+      </client>
+    </contract>
+  </com.mcosta.domain.model.Equipment>
+  <com.mcosta.domain.model.Equipment>
+    <idEquipment>1</idEquipment>
+    <description>teste</description>
+    <brand>111</brand>
+    <model>22</model>
+    <serialNumber>teste</serialNumber>
+    <contract>
+      <idContract>1</idContract>
+      <effectiveStartDate>2021-04-20</effectiveStartDate>
+      <durationInMonths>7</durationInMonths>
+      <client class="com.mcosta.domain.model.Physical">
+        <idClient>1</idClient>
+        <phone>412414</phone>
+        <address>412141</address>
+        <name>Marcio</name>
+        <cpf>2431244</cpf>
+      </client>
+    </contract>
+  </com.mcosta.domain.model.Equipment>
+  <com.mcosta.domain.model.Equipment>
+    <idEquipment>2</idEquipment>
+    <description>asadsa</description>
+    <brand>sdad</brand>
+    <model>dasd</model>
+    <serialNumber>aaa</serialNumber>
+    <contract>
+      <idContract>1</idContract>
+      <effectiveStartDate>2021-04-20</effectiveStartDate>
+      <durationInMonths>7</durationInMonths>
+      <client class="com.mcosta.domain.model.Physical">
+        <idClient>1</idClient>
+        <phone>412414</phone>
+        <address>412141</address>
+        <name>Marcio</name>
+        <cpf>2431244</cpf>
+      </client>
+    </contract>
+  </com.mcosta.domain.model.Equipment>
+</set>

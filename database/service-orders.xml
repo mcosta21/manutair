@@ -1,0 +1,28 @@
+<set>
+  <com.mcosta.domain.model.ServiceOrder>
+    <idServiceOrder>1</idServiceOrder>
+    <equipmentLocationAddress>dswdf</equipmentLocationAddress>
+    <problemDescription>sdfdf</problemDescription>
+    <creationDate>2021-04-19T22:57:46.1252729</creationDate>
+    <equipment>
+      <idEquipment>1</idEquipment>
+      <description>teste</description>
+      <brand>111</brand>
+      <model>22</model>
+      <serialNumber>teste</serialNumber>
+      <contract>
+        <idContract>1</idContract>
+        <effectiveStartDate>2021-04-20</effectiveStartDate>
+        <durationInMonths>7</durationInMonths>
+        <client class="com.mcosta.domain.model.Physical">
+          <idClient>1</idClient>
+          <phone>412414</phone>
+          <address>412141</address>
+          <name>Marcio</name>
+          <cpf>2431244</cpf>
+        </client>
+      </contract>
+    </equipment>
+    <statusServiceOrderEnum>OPENED</statusServiceOrderEnum>
+  </com.mcosta.domain.model.ServiceOrder>
+</set>

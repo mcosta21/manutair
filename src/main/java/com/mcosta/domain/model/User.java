@@ -11,7 +11,10 @@ import lombok.ToString;
 
 @EqualsAndHashCode @ToString
 public class User {
-    
+
+    @Getter @Setter
+    private Long idUser;
+
     @Getter @Setter
     private String username;
 

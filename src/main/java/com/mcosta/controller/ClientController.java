@@ -31,13 +31,16 @@ import javafx.util.Callback;
 
 public class ClientController extends AccessProviderController implements Initializable {
 
+
+    private ClientDao clientDao = new ClientDao();
+    private Physical physical;
+    private Legal legal;
+
     @FXML
     private Label lblUsername;
 
     @FXML
     private Label lblUserType;
-    
-    private ClientDao clientDao = new ClientDao();
 
     @FXML
     private TextField inputNamePhysical;
@@ -71,9 +74,6 @@ public class ClientController extends AccessProviderController implements Initia
 
     @FXML
     private TableView tableViewLegal;
-
-    private Physical physical;
-    private Legal legal;
     
     @FXML
     private void onClickSavePhysical(ActionEvent event) {
@@ -353,7 +353,6 @@ public class ClientController extends AccessProviderController implements Initia
 
         tableViewLegal.getColumns().addAll(colBtnUpdate, colBtnDelete);
     }
-
 
     private void onClickSelectForUpdate(Object object){
 

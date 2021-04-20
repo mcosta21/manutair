@@ -43,6 +43,8 @@ public abstract class AccessProvider {
         List<Page> pages = new ArrayList<Page>();
         pages.add(new Page("client", "Clientes"));
         pages.add(new Page("contract", "Contratos"));
+        pages.add(new Page("equipment", "Equipamentos"));
+        pages.add(new Page("service-order", "Ordem de Serviço"));
         return pages;
     }
 

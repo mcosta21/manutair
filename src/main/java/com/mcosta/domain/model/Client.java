@@ -10,6 +10,9 @@ import lombok.ToString;
 public class Client {
 
     @Getter @Setter
+    protected Long idClient;
+
+    @Getter @Setter
     protected String phone;
 
     @Getter @Setter

@@ -31,14 +31,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class UserController extends AccessProviderController implements Initializable {
-    
+
+    private UserDao userDao = new UserDao();
+    private User user;
+
     @FXML
     private Label lblUsername;
 
     @FXML
     private Label lblUserType;
-    
-    private UserDao userDao = new UserDao();
 
     @FXML
     private TextField inputLogin;
@@ -57,8 +58,6 @@ public class UserController extends AccessProviderController implements Initiali
 
     @FXML
     private TableView tableView;
-
-    private User user;
 
     @FXML
     private void onClickSave(ActionEvent event) {

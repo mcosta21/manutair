@@ -1,5 +1,6 @@
 package com.mcosta.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,11 +9,10 @@ import java.util.ResourceBundle;
 
 import com.mcosta.domain.dao.ClientDao;
 import com.mcosta.domain.dao.ContractDao;
-import com.mcosta.domain.model.Client;
-import com.mcosta.domain.model.Contract;
-import com.mcosta.domain.model.Legal;
-import com.mcosta.domain.model.Physical;
+import com.mcosta.domain.dao.EquipmentDao;
+import com.mcosta.domain.model.*;
 import com.mcosta.util.AccessProvider;
+import com.mcosta.util.ManagerWindow;
 import com.mcosta.util.MessageAlert;
 import com.thoughtworks.xstream.converters.basic.StringConverter;
 
@@ -20,7 +20,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -34,10 +39,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class ContractController extends AccessProviderController implements Initializable {
-    
+
+    private Contract contract;
+    private ContractDao contractDao = new ContractDao();
+    private ClientDao clientDao = new ClientDao();
+    private EquipmentDao equipmentDao = new EquipmentDao();
+
     @FXML
     private Label lblUsername;
 
@@ -54,18 +66,25 @@ public class ContractController extends AccessProviderController implements Init
     private ComboBox<Client> inputClient;
 
     @FXML
-    private ComboBox<Client> inputEquipament;
+    private TextField inputDescription;
 
-    @FXML 
+    @FXML
+    private TextField inputBrand;
+
+    @FXML
+    private TextField inputModel;
+
+    @FXML
+    private TextField inputSerialNumber;
+
+    @FXML
     private TabPane tabPane;
 
     @FXML
     private TableView tableView;
 
-    private Contract contract;
-
-    private ContractDao contractDao = new ContractDao();
-    private ClientDao clientDao = new ClientDao();
+    @FXML
+    private ListView listViewEquipaments;
 
     @FXML
     private void onClickSave(ActionEvent event) {
@@ -93,6 +112,29 @@ public class ContractController extends AccessProviderController implements Init
             new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
         }
      }
+
+    @FXML
+    private void onClickSaveEquipment(ActionEvent event) {
+        LocalDate effectiveStartDate = inputEffectiveStartDate.getValue();
+        Integer durationMonths = inputDurationMonth.getSelectionModel().getSelectedItem();
+        Client client = inputClient.getSelectionModel().getSelectedItem();
+
+        try {
+
+        } catch (Exception e) {
+            new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
+        }
+    }
+
+    @FXML
+    private void onClickCancelEquipment(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void openModalCreateEquipment(ActionEvent event) throws IOException {
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -143,6 +185,12 @@ public class ContractController extends AccessProviderController implements Init
         });
     }
 
+    private void getEquipments(Long idContract) {
+        List<Equipment> equipments = equipmentDao.index(idContract);
+        ObservableList<Equipment> obs = FXCollections.observableArrayList(equipments);
+        listViewEquipaments.setItems(obs);
+    }
+
     private String getValueComboBox(Object object){
         if(object instanceof Physical) {
             Physical p = (Physical) object;
@@ -156,7 +204,7 @@ public class ContractController extends AccessProviderController implements Init
     }
 
     private void populateTableView(){
-        Double widthColumn = tableView.prefWidthProperty().divide(2 + 0.55).getValue();
+        Double widthColumn = tableView.prefWidthProperty().divide(2 + 0.20).getValue();
         
         TableColumn columnName = new TableColumn("DATA DE INÍCIO");
         columnName.setMinWidth(widthColumn);
@@ -208,39 +256,9 @@ public class ContractController extends AccessProviderController implements Init
             }
         };
 
-        Callback<TableColumn<Contract, Void>, TableCell<Contract, Void>> cellFactoryDelete = new Callback<TableColumn<Contract, Void>, TableCell<Contract, Void>>() {
-            @Override
-            public TableCell<Contract, Void> call(final TableColumn<Contract, Void> param) {
-                final TableCell<Contract, Void> cell = new TableCell<Contract, Void>() {
-
-                    private final Button btnDelete = new Button("Excluir");
-
-                    {
-
-                        btnDelete.setOnAction((ActionEvent event) -> {
-                            Contract data = getTableView().getItems().get(getIndex());
-                            onClickSelectForDelete(data);
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btnDelete);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-
         colBtnUpdate.setCellFactory(cellFactoryUpdate);
-        colBtnDelete.setCellFactory(cellFactoryDelete);
 
-        tableView.getColumns().addAll(colBtnUpdate, colBtnDelete);
+        tableView.getColumns().addAll(colBtnUpdate);
     }
 
     private void onClickSelectForUpdate(Object object){
@@ -249,17 +267,8 @@ public class ContractController extends AccessProviderController implements Init
         inputEffectiveStartDate.setValue(contract.getEffectiveStartDate());
         inputDurationMonth.getSelectionModel().select(contract.getDurationInMonths());
         inputClient.getSelectionModel().select(contract.getClient());
-        //inputEquipament
+        getEquipments(contract.getIdContract());
         goToTab(1);
-    }
-
-    private void onClickSelectForDelete(Object object) {
-        try {
-            clientDao.delete(object);
-            updateTable();
-        } catch (Exception e) {
-            new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
-        }
     }
 
     private void goToTab(int index){

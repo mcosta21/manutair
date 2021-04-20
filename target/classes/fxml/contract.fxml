@@ -48,31 +48,28 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="229.0" layoutY="69.0" prefHeight="98.0" prefWidth="908.0">
+                        <VBox layoutX="41.0" layoutY="39.0" prefHeight="98.0" prefWidth="645.0">
                            <children>
                               <Label prefHeight="42.0" prefWidth="220.0" text="Data de inicio de vigência *" />
                               <DatePicker fx:id="inputEffectiveStartDate" prefHeight="48.0" prefWidth="908.0" />
                            </children>
                         </VBox>
-                        <VBox layoutX="229.0" layoutY="291.0" prefHeight="98.0" prefWidth="908.0">
+                        <VBox layoutX="41.0" layoutY="269.0" prefHeight="98.0" prefWidth="646.0">
                            <children>
                               <Label prefHeight="42.0" prefWidth="305.0" text="Cliente *" />
                               <ComboBox fx:id="inputClient" prefHeight="49.0" prefWidth="910.0" />
                            </children>
                         </VBox>
-                        <Button layoutX="938.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickSave" prefHeight="48.0" prefWidth="199.0" text="Salvar" />
-                        <VBox layoutX="229.0" layoutY="400.0" prefHeight="98.0" prefWidth="908.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="305.0" text="Equipamento *" />
-                              <ComboBox fx:id="inputEquipament" prefHeight="49.0" prefWidth="910.0" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="229.0" layoutY="182.0" prefHeight="98.0" prefWidth="908.0">
+                        <Button layoutX="488.0" layoutY="400.0" mnemonicParsing="false" onAction="#onClickSave" prefHeight="48.0" prefWidth="199.0" text="Salvar" />
+                        <VBox layoutX="41.0" layoutY="152.0" prefHeight="98.0" prefWidth="646.0">
                            <children>
                               <Label prefHeight="42.0" prefWidth="305.0" text="Duração em meses *" />
                               <ComboBox fx:id="inputDurationMonth" prefHeight="49.0" prefWidth="910.0" />
                            </children>
                         </VBox>
+                        <ListView fx:id="listViewEquipaments" layoutX="728.0" layoutY="81.0" prefHeight="484.0" prefWidth="591.0" />
+                        <Label layoutX="728.0" layoutY="39.0" prefHeight="42.0" prefWidth="220.0" text="Equipamentos" />
+                        <Button layoutX="1163.0" layoutY="39.0" mnemonicParsing="false" onAction="#openModalCreateEquipment" prefHeight="36.0" prefWidth="156.0" text="Adicionar" />
                      </children>
                   </AnchorPane>
             </content>

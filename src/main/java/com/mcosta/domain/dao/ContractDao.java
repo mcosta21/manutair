@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.mcosta.domain.model.Client;
 import com.mcosta.domain.model.Contract;
 import com.mcosta.domain.validator.ContractValidator;
 import com.thoughtworks.xstream.XStream;
@@ -27,7 +28,7 @@ public class ContractDao implements Dao {
         if(!contractValidator.isValid(contract)) {
             throw new Exception(contractValidator.getMessage());
         }
-
+        contract.setIdContract(Long.valueOf(index().size()+1));
         contracts.add(contract);
         persist();
 
@@ -40,8 +41,6 @@ public class ContractDao implements Dao {
 
     @Override
     public void delete(Object object) throws Exception{
-        contracts.remove(object);
-        persist();
     }
 
     @Override
@@ -56,6 +55,21 @@ public class ContractDao implements Dao {
         List<Contract> items = new ArrayList<>();
         for(Contract c : contracts){
             items.add(c);
+        }
+
+        return items;
+    }
+
+    public List<Contract> index(Long idClient) {
+        File file = new File(FILE_NAME);
+
+        if(!file.exists()) return new ArrayList<Contract>();
+
+        XStream xs = new XStream();
+
+        List<Contract> items = new ArrayList<>();
+        for(Contract c : (Set<Contract>) xs.fromXML(file)){
+            if(c.getClient().getIdClient().equals(idClient)) items.add(c);
         }
 
         return items;

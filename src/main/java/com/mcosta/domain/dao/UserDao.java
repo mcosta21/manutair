@@ -32,7 +32,7 @@ public class UserDao implements Dao {
         if(user.getUserType() == UserTypeEnum.TECHNICIAN) {
             user.setTechnician(true);
         }
-
+        user.setIdUser(Long.valueOf(index().size()+1));
         users.add(user);
         persist();
 

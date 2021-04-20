@@ -7,9 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode
 public class Equipment {
-    
+
     @Getter @Setter
     private Long idEquipment;
 
@@ -28,9 +28,6 @@ public class Equipment {
     @Getter @Setter
     private Contract contract;
 
-    @Getter
-    private List<ServiceOrder> serviceOrders;
-
     public Equipment(String description, String brand, String model, String serialNumber, Contract contract) {
         this.description = description;
         this.brand = brand;
@@ -39,4 +36,8 @@ public class Equipment {
         this.contract = contract;
     }
 
+    @Override
+    public String toString() {
+        return description + " " + brand + " " + model + " " + serialNumber;
+    }
 }

@@ -90,6 +90,7 @@ public class ClientDao implements Dao {
         if(!clientValidator.isValid(physical)) {
             throw new Exception(clientValidator.getMessage());
         }
+        physical.setIdClient(Long.valueOf(index().size()+1));
         physicals.add(physical);
         persist(FILE_NAME_PHYSICAL, physicals);
     }
@@ -98,6 +99,7 @@ public class ClientDao implements Dao {
         if(!clientValidator.isValid(legal)) {
             throw new Exception(clientValidator.getMessage());
         }
+        legal.setIdClient(Long.valueOf(index().size()+1));
         legals.add(legal);
         persist(FILE_NAME_LEGAL, legals);
 

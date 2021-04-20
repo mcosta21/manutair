@@ -8,9 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode
 public class Contract {
-    
+
+    @Getter @Setter
+    private Long idContract;
+
     @Getter @Setter
     private LocalDate effectiveStartDate;
 
@@ -29,4 +32,8 @@ public class Contract {
         this.client = client;
     }
 
+    @Override
+    public String toString() {
+        return "Contrato " + idContract + " - " + "Data de início de vigência: " + effectiveStartDate;
+    }
 }

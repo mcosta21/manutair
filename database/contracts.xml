@@ -1,22 +1,14 @@
 <set>
   <com.mcosta.domain.model.Contract>
+    <idContract>1</idContract>
     <effectiveStartDate>2021-04-20</effectiveStartDate>
-    <durationInMonths>9</durationInMonths>
+    <durationInMonths>7</durationInMonths>
     <client class="com.mcosta.domain.model.Physical">
-      <phone>27622460</phone>
-      <address>Rua 1</address>
+      <idClient>1</idClient>
+      <phone>412414</phone>
+      <address>412141</address>
       <name>Marcio</name>
-      <cpf>14888140740</cpf>
-    </client>
-  </com.mcosta.domain.model.Contract>
-  <com.mcosta.domain.model.Contract>
-    <effectiveStartDate>2021-04-07</effectiveStartDate>
-    <durationInMonths>1</durationInMonths>
-    <client class="com.mcosta.domain.model.Physical">
-      <phone>27622460</phone>
-      <address>Rua 1</address>
-      <name>Marcio</name>
-      <cpf>14888140740</cpf>
+      <cpf>2431244</cpf>
     </client>
   </com.mcosta.domain.model.Contract>
 </set>
