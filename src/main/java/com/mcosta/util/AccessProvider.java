@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.mcosta.domain.enumeration.UserTypeEnum;
 
+import com.mcosta.domain.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import lombok.Getter;
@@ -18,15 +19,12 @@ import lombok.Setter;
 public abstract class AccessProvider {
     
     @Getter @Setter
-    private static String username;
-
-    @Getter @Setter
-    private static String userType;
+    private static User user;
 
     public static List<Page> getPagesByUserType(UserTypeEnum userType) {
-        System.out.println(userType.name());
         switch(userType) {
             case ATTENDANT:
+                System.out.println("atendente");
                 return pagesForAttendant();
             case SUPERVISOR:
                 return pagesForSupervisor();
@@ -50,14 +48,13 @@ public abstract class AccessProvider {
 
     private static List<Page> pagesForSupervisor(){
         List<Page> pages = new ArrayList<Page>();
-        pages.add(new Page("supervisor", "Supervisor"));
+        pages.add(new Page("service-order", "Ordem de Serviço"));
         return pages;
     }
 
     private static List<Page> pagesForTechnician(){
         List<Page> pages = new ArrayList<Page>();
-        pages.add(new Page("technician", "Técnico"));
-        pages.add(new Page("view-service-orders", "Visualizar Ordens"));
+        pages.add(new Page("service-order", "Ordem de Serviço"));
         return pages;
     }
 

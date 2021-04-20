@@ -98,8 +98,8 @@ public class EquipmentController extends AccessProviderController implements Ini
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblUsername.setText(AccessProvider.getUsername());
-        lblUserType.setText(AccessProvider.getUserType());
+        lblUsername.setText(AccessProvider.getUser().getName());
+        lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
         getClients();
         populateTableView();
     }

@@ -1,9 +1,9 @@
 <set>
   <com.mcosta.domain.model.ServiceOrder>
     <idServiceOrder>1</idServiceOrder>
-    <equipmentLocationAddress>dswdf</equipmentLocationAddress>
-    <problemDescription>sdfdf</problemDescription>
-    <creationDate>2021-04-19T22:57:46.1252729</creationDate>
+    <equipmentLocationAddress>SASASA</equipmentLocationAddress>
+    <problemDescription>SASAS</problemDescription>
+    <creationDate>2021-04-20T00:51:58.3419206</creationDate>
     <equipment>
       <idEquipment>1</idEquipment>
       <description>teste</description>

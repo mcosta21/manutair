@@ -18,8 +18,7 @@ public class AccessProviderController {
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
-        AccessProvider.setUsername(null);
-        AccessProvider.setUserType(null);
+        AccessProvider.setUser(null);
         ManagerWindow.openWindow("login", "Login");
         ManagerWindow.closeWindow(event);
     }

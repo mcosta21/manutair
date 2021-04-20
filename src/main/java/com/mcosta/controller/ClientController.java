@@ -135,8 +135,8 @@ public class ClientController extends AccessProviderController implements Initia
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblUsername.setText(AccessProvider.getUsername());
-        lblUserType.setText(AccessProvider.getUserType());
+        lblUsername.setText(AccessProvider.getUser().getName());
+        lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
         populateTableView();
     }
 

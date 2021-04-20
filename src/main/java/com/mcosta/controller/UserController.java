@@ -90,8 +90,8 @@ public class UserController extends AccessProviderController implements Initiali
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblUsername.setText(AccessProvider.getUsername());
-        lblUserType.setText(AccessProvider.getUserType());
+        lblUsername.setText(AccessProvider.getUser().getName());
+        lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
         getUserTypes();
         populateTableView();
     }

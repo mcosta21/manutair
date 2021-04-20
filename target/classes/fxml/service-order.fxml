@@ -87,6 +87,64 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab text="Alocar tecnico">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1366.0">
+                     <children>
+                        <VBox layoutX="229.0" layoutY="232.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="220.0" text="Técnico *" />
+                              <ComboBox fx:id="inputTechnician" prefHeight="49.0" prefWidth="910.0" />
+                           </children>
+                        </VBox>
+                        <Button layoutX="939.0" layoutY="478.0" mnemonicParsing="false" onAction="#onClickAllocateTechnician" prefHeight="48.0" prefWidth="199.0" text="Confirmar" />
+                        <VBox layoutX="229.0" layoutY="339.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="305.0" text="Data do serviço *" />
+                              <DatePicker fx:id="inputServiceDate" prefHeight="49.0" prefWidth="993.0" />
+                           </children>
+                        </VBox>
+                        <Label layoutX="229.0" layoutY="36.0" prefHeight="30.0" prefWidth="281.0" text="Ordem de Serviço" />
+                        <Label fx:id="valueIdServiceOrder" layoutX="229.0" layoutY="66.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="valueEquipment" layoutX="510.0" layoutY="66.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="510.0" layoutY="36.0" prefHeight="30.0" prefWidth="281.0" text="Equipamento" />
+                        <Label layoutX="791.0" layoutY="36.0" prefHeight="30.0" prefWidth="281.0" text="Cliente" />
+                        <Label fx:id="valueClient" layoutX="791.0" layoutY="66.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="valueContract" layoutX="229.0" layoutY="157.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="229.0" layoutY="127.0" prefHeight="30.0" prefWidth="281.0" text="Contrato" />
+                        <Label layoutX="510.0" layoutY="127.0" prefHeight="30.0" prefWidth="281.0" text="Data de abertura" />
+                        <Label fx:id="valueCreationDate" layoutX="510.0" layoutY="157.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="725.0" layoutY="478.0" mnemonicParsing="false" onAction="#onClickCancelAllocateTechnician" prefHeight="48.0" prefWidth="199.0" text="Cancelar" />
+                        <Label fx:id="valueEquipmentAddress" layoutX="791.0" layoutY="157.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="791.0" layoutY="127.0" prefHeight="30.0" prefWidth="281.0" text="Endereço do equipamento" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

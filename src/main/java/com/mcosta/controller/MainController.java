@@ -5,7 +5,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mcosta.domain.dao.UserDao;
 import com.mcosta.domain.enumeration.UserTypeEnum;
+import com.mcosta.domain.model.User;
 import com.mcosta.util.AccessProvider;
 import com.mcosta.util.ManagerWindow;
 import com.mcosta.util.AccessProvider.Page;
@@ -32,28 +34,29 @@ public class MainController extends AccessProviderController implements Initiali
     private VBox vboxx;
 
     private ObservableList<Button> obsListActionButtons = FXCollections.observableArrayList();
-    
+
+    private UserDao userDao = new UserDao();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        User user = userDao.index().get(0);
+        System.out.println(user.getName());
+        AccessProvider.setUser(user);
 
-        AccessProvider.setUsername("Marcio Costa");
-        AccessProvider.setUserType(UserTypeEnum.ADMIN.getValue());
-
-        lblUsername.setText(AccessProvider.getUsername());
-        lblUserType.setText(AccessProvider.getUserType());
+        lblUsername.setText(AccessProvider.getUser().getName());
+        lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
 
         generateOptionPages();
     }    
 
     private void generateOptionPages(){
 
-        List<Page> pages = AccessProvider.getPagesByUserType(UserTypeEnum.ADMIN);
+        List<Page> pages = AccessProvider.getPagesByUserType(AccessProvider.getUser().getUserType());
 
         HBox hboxController = new HBox();
         hboxController.setSpacing(10);
         int controller = 0;
 
-        System.out.println(pages.size());
         for(Page page : pages){
             
             Button button = new Button(page.getLabel().toUpperCase());

@@ -138,8 +138,8 @@ public class ContractController extends AccessProviderController implements Init
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblUsername.setText(AccessProvider.getUsername());
-        lblUserType.setText(AccessProvider.getUserType());
+        lblUsername.setText(AccessProvider.getUser().getName());
+        lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
 
         populateTableView();
         getClients();

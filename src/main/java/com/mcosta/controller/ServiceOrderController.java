@@ -6,6 +6,7 @@ import com.mcosta.domain.dao.EquipmentDao;
 import com.mcosta.domain.dao.ServiceOrderDao;
 import com.mcosta.domain.model.*;
 import com.mcosta.util.AccessProvider;
+import com.mcosta.util.DateFormatter;
 import com.mcosta.util.MessageAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,6 +52,30 @@ public class ServiceOrderController extends AccessProviderController implements 
 
     @FXML
     private TextField inputAddressEquipment;
+
+    @FXML
+    private Label valueCreationDate;
+
+    @FXML
+    private Label valueIdServiceOrder;
+
+    @FXML
+    private Label valueEquipmentAddress;
+
+    @FXML
+    private DatePicker inputServiceDate;
+
+    @FXML
+    private Label valueClient;
+
+    @FXML
+    private Label valueContract;
+
+    @FXML
+    private Label valueEquipment;
+
+    @FXML
+    private ComboBox<User> inputTechnician;
 
     @FXML 
     private TabPane tabPane;
@@ -99,30 +124,30 @@ public class ServiceOrderController extends AccessProviderController implements 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblUsername.setText(AccessProvider.getUsername());
-        lblUserType.setText(AccessProvider.getUserType());
+        lblUsername.setText(AccessProvider.getUser().getName());
+        lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
         getClients();
         populateTableView();
-
         managerTabs();
-
     }
 
     private void managerTabs(){
-        /*
-        switch() {
+        switch(AccessProvider.getUser().getUserType()) {
             case ATTENDANT:
-                return pagesForAttendant();
+                tabPane.getTabs().remove(2);
+                break;
             case SUPERVISOR:
-                return pagesForSupervisor();
+                tabPane.getTabs().remove(1);
+                Tab tabAllocateTechnician = tabPane.getTabs().get(1);
+                tabAllocateTechnician.setDisable(true);
+                break;
             case TECHNICIAN:
-                return pagesForTechnician();
+                tabPane.getTabs().remove(0);
+                tabPane.getTabs().remove(0);
+                break;
             case ADMIN:
-                return pagesForAdmin();
+                break;
         }
-        */
-        Tab tab = tabPane.getTabs().get(1);
-        tabPane.getTabs().remove(tab);
     }
 
     private void clear(){
@@ -170,6 +195,11 @@ public class ServiceOrderController extends AccessProviderController implements 
         });
     }
 
+    private void getTechnicians(){
+        //buscar usuários de tipo tecnico e is technico true
+    }
+
+
     private String getValueComboBox(Object object){
         if(object instanceof Physical) {
             Physical p = (Physical) object;
@@ -187,30 +217,22 @@ public class ServiceOrderController extends AccessProviderController implements 
     }
 
     private void populateTableView(){
-        Double widthColumn = tableView.prefWidthProperty().divide(5 + 0.30).getValue();
-        
         TableColumn columnIdServiceOrder = new TableColumn("ORDEM DE SERVIÇO");
-        columnIdServiceOrder.setMinWidth(widthColumn);
         columnIdServiceOrder.setCellValueFactory(new PropertyValueFactory<ServiceOrder, String>("IdServiceOrder"));
 
         TableColumn columnCreationDate = new TableColumn("DATA DE ABERTURA");
-        columnCreationDate.setMinWidth(widthColumn);
         columnCreationDate.setCellValueFactory(new PropertyValueFactory<ServiceOrder, String>("creationDateFormatted"));
 
         TableColumn columnEquipment = new TableColumn("EQUIPAMENTO");
-        columnEquipment.setMinWidth(widthColumn);
         columnEquipment.setCellValueFactory(new PropertyValueFactory<ServiceOrder, String>("descriptionEquipment"));
 
         TableColumn columnClient = new TableColumn("CLIENT");
-        columnClient.setMinWidth(widthColumn);
         columnClient.setCellValueFactory(new PropertyValueFactory<ServiceOrder, String>("clientName"));
 
         TableColumn columnContract = new TableColumn("CONTRATO");
-        columnContract.setMinWidth(widthColumn);
         columnContract.setCellValueFactory(new PropertyValueFactory<ServiceOrder, String>("idContract"));
 
         tableView.getColumns().addAll(columnIdServiceOrder, columnCreationDate, columnEquipment, columnClient, columnContract);
-
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         addButtonsToTable();
 
@@ -218,15 +240,30 @@ public class ServiceOrderController extends AccessProviderController implements 
     }
 
     private void updateTable() {
+        // FILTRAR POR TIPO DE USUÁRIO
         ObservableList<ServiceOrder> obs = FXCollections.observableArrayList(serviceOrderDao.index());
         tableView.setItems(obs);
         tableView.refresh();
     }
 
     private void addButtonsToTable() {
+        switch(AccessProvider.getUser().getUserType()) {
+            case ATTENDANT:
+                addButtonsToTableForAttendant();
+                break;
+            case SUPERVISOR:
+                addButtonsToTableForSupervisor();
+                break;
+            case TECHNICIAN:
+                break;
+            case ADMIN:
+                break;
+        }
+    }
+
+    private void addButtonsToTableForAttendant() {
         TableColumn<ServiceOrder, Void> colBtnUpdate = new TableColumn();
         colBtnUpdate.setMinWidth(50);
-
         Callback<TableColumn<ServiceOrder, Void>, TableCell<ServiceOrder, Void>> cellFactoryUpdate = new Callback<TableColumn<ServiceOrder, Void>, TableCell<ServiceOrder, Void>>() {
             @Override
             public TableCell<ServiceOrder, Void> call(final TableColumn<ServiceOrder, Void> param) {
@@ -254,10 +291,42 @@ public class ServiceOrderController extends AccessProviderController implements 
                 return cell;
             }
         };
-
         colBtnUpdate.setCellFactory(cellFactoryUpdate);
-
         tableView.getColumns().addAll(colBtnUpdate);
+    }
+
+    private void addButtonsToTableForSupervisor() {
+        TableColumn<ServiceOrder, Void> colBtnAllocateTechnician = new TableColumn();
+        colBtnAllocateTechnician.setMinWidth(50);
+        Callback<TableColumn<ServiceOrder, Void>, TableCell<ServiceOrder, Void>> cellFactoryAllocateTechnician = new Callback<TableColumn<ServiceOrder, Void>, TableCell<ServiceOrder, Void>>() {
+            @Override
+            public TableCell<ServiceOrder, Void> call(final TableColumn<ServiceOrder, Void> param) {
+                final TableCell<ServiceOrder, Void> cell = new TableCell<ServiceOrder, Void>() {
+
+                    private final Button btnAllocateTechnician = new Button("Alocar Técnico");
+
+                    {
+                        btnAllocateTechnician.setOnAction((ActionEvent event) -> {
+                            ServiceOrder data = getTableView().getItems().get(getIndex());
+                            onClickAllocateTechnician(data);
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btnAllocateTechnician);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        colBtnAllocateTechnician.setCellFactory(cellFactoryAllocateTechnician);
+        tableView.getColumns().addAll(colBtnAllocateTechnician);
     }
 
     private void onClickSelectForUpdate(ServiceOrder _serviceOrder){
@@ -269,5 +338,38 @@ public class ServiceOrderController extends AccessProviderController implements 
         inputEquipment.getSelectionModel().select(serviceOrder.getEquipment());
         goToTab(1);
     }
+
+    private void onClickAllocateTechnician(ServiceOrder _serviceOrder){
+        Tab tabServiceOrders = tabPane.getTabs().get(0);
+        tabServiceOrders.setDisable(true);
+        Tab tabAllocateTechnician = tabPane.getTabs().get(1);
+        tabAllocateTechnician.setDisable(false);
+        this.serviceOrder = _serviceOrder;
+        valueClient.setText(serviceOrder.getClientName());
+        valueContract.setText(String.valueOf(serviceOrder.getIdContract()));
+        valueCreationDate.setText(DateFormatter.LocalDateTimeFormatted(serviceOrder.getCreationDate()));
+        valueEquipment.setText(serviceOrder.getEquipment().getDescription());
+        valueIdServiceOrder.setText(String.valueOf(serviceOrder.getIdServiceOrder()));
+        valueEquipmentAddress.setText(serviceOrder.getEquipmentLocationAddress());
+        goToTab(1);
+    }
+
+    @FXML
+    private void onClickAllocateTechnician(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void onClickCancelAllocateTechnician(ActionEvent event) {
+        this.serviceOrder = null;
+        Tab tabServiceOrders = tabPane.getTabs().get(0);
+        tabServiceOrders.setDisable(false);
+        Tab tabAllocateTechnician = tabPane.getTabs().get(1);
+        tabAllocateTechnician.setDisable(true);
+        goToTab(0);
+    }
+
+
+
 
 }
