@@ -1,9 +1,6 @@
 package com.mcosta.util;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,8 +8,6 @@ import java.util.Set;
 import com.mcosta.domain.enumeration.UserTypeEnum;
 
 import com.mcosta.domain.model.User;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +19,6 @@ public abstract class AccessProvider {
     public static List<Page> getPagesByUserType(UserTypeEnum userType) {
         switch(userType) {
             case ATTENDANT:
-                System.out.println("atendente");
                 return pagesForAttendant();
             case SUPERVISOR:
                 return pagesForSupervisor();
