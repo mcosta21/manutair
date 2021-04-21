@@ -1,6 +1,8 @@
 package com.mcosta.domain.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.mcosta.domain.enumeration.StatusServiceOrderEnum;
 
@@ -10,7 +12,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@EqualsAndHashCode @ToString
 public class ServiceOrder {
 
     @Getter @Setter
@@ -26,10 +27,13 @@ public class ServiceOrder {
     private String solutionDescription;
 
     @Getter
-    private LocalDateTime creationDate;
+    private LocalDateTime creationDate = LocalDateTime.now();;
 
     @Getter @Setter
     private LocalDateTime serviceDate;
+
+    @Getter @Setter
+    private LocalDate finishDate;
 
     @Getter @Setter
     private Equipment equipment;
@@ -43,7 +47,6 @@ public class ServiceOrder {
     public ServiceOrder(String equipmentLocationAddress, String problemDescription, Equipment equipment) {
         this.equipmentLocationAddress = equipmentLocationAddress;
         this.problemDescription = problemDescription;
-        this.creationDate = LocalDateTime.now();
         this.equipment = equipment;
     }
 
@@ -72,5 +75,20 @@ public class ServiceOrder {
         return DateFormatter.LocalDateTimeFormatted(this.creationDate);
     }
 
+    public String getStatusServiceOrder(){
+        return this.statusServiceOrderEnum.getValue();
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ServiceOrder)) return false;
+        ServiceOrder that = (ServiceOrder) o;
+        return Objects.equals(idServiceOrder, that.idServiceOrder);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idServiceOrder);
+    }
 }

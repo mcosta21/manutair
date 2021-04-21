@@ -12,14 +12,14 @@ public class EntryPoint extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
 
         Font.loadFont(Main.class.getResource("/fonts/Roboto-Medium.ttf").toExternalForm(), 12);
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/custom.css");
         
-        stage.setTitle("Sistema Financeiro");
+        stage.setTitle("ManutAir");
         stage.setScene(scene);
         stage.show();
     }

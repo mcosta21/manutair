@@ -8,11 +8,20 @@ public class ContractValidator {
 
     public boolean isValid(Contract contract) {
 
-        /*
-        if (client.getName() == null || client.getName().isEmpty()) {
-            message = "Nome não informado.";
+        if (contract.getEffectiveStartDate() == null) {
+            message = "Data de início da vigência não informado.";
             return false;
-        }*/
+        }
+
+        if (contract.getDurationInMonths() == null) {
+            message = "Duração em meses não informado.";
+            return false;
+        }
+
+        if (contract.getClient() == null) {
+            message = "Cliente não informado.";
+            return false;
+        }
 
         return true;
     }

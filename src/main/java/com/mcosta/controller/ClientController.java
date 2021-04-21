@@ -17,14 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -100,6 +93,7 @@ public class ClientController extends AccessProviderController implements Initia
             goToTab(0);
             clearPhysical();
         } catch (Exception e) {
+            this.physical = null;
             new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
         }
     }
@@ -129,6 +123,7 @@ public class ClientController extends AccessProviderController implements Initia
             goToTab(2);
             clearLegal();
         } catch (Exception e) {
+            this.legal = null;
             new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
         }
     }
@@ -141,19 +136,11 @@ public class ClientController extends AccessProviderController implements Initia
     }
 
     private void clearPhysical(){
-        physical = null;
-        inputNamePhysical.setText("");
-        inputCpfPhysical.setText("");
-        inputPhonePhysical.setText("");
-        inputAddressPhysical.setText("");
+        clearPhysical(null);
     }
 
     private void clearLegal(){
-        legal = null;
-        inputCompanyNameLegal.setText("");
-        inputCnpjLegal.setText("");
-        inputPhoneLegal.setText("");
-        inputAddressLegal.setText("");
+        clearLegal(null);
     }
 
     private void goToTab(int index){
@@ -161,43 +148,35 @@ public class ClientController extends AccessProviderController implements Initia
     }
 
     private void populateTableView(){
-        Double widthColumn = tableViewPhysical.prefWidthProperty().divide(4 + 0.55).getValue();
-        
+
         TableColumn columnName = new TableColumn("NOME");
-        columnName.setMinWidth(widthColumn);
         columnName.setCellValueFactory(new PropertyValueFactory<Physical, String>("name"));
 
         TableColumn columnCpf = new TableColumn("CPF");
-        columnCpf.setMinWidth(widthColumn);
         columnCpf.setCellValueFactory(new PropertyValueFactory<Physical, String>("cpf"));
 
         TableColumn columnPhone1 = new TableColumn("TELEFONE");
-        columnPhone1.setMinWidth(widthColumn);
         columnPhone1.setCellValueFactory(new PropertyValueFactory<Client, String>("phone"));
 
         TableColumn columnAddress1 = new TableColumn("ENDEREÇO");
-        columnAddress1.setMinWidth(widthColumn);
         columnAddress1.setCellValueFactory(new PropertyValueFactory<Physical, String>("address"));
 
         TableColumn columnCompanyName = new TableColumn("RAZÃO SOCIAL");
-        columnCompanyName.setMinWidth(widthColumn);
         columnCompanyName.setCellValueFactory(new PropertyValueFactory<Legal, String>("companyName"));
 
         TableColumn columnCnpj = new TableColumn("CPF");
-        columnCnpj.setMinWidth(widthColumn);
         columnCnpj.setCellValueFactory(new PropertyValueFactory<Legal, String>("cnpj"));
 
         TableColumn columnPhone2 = new TableColumn("TELEFONE");
-        columnPhone2.setMinWidth(widthColumn);
         columnPhone2.setCellValueFactory(new PropertyValueFactory<Legal, String>("phone"));
 
         TableColumn columnAddress2 = new TableColumn("ENDEREÇO");
-        columnAddress2.setMinWidth(widthColumn);
         columnAddress2.setCellValueFactory(new PropertyValueFactory<Legal, String>("address"));
 
         tableViewPhysical.getColumns().addAll(columnName, columnCpf, columnPhone1, columnAddress1);
         tableViewLegal.getColumns().addAll(columnCompanyName, columnCnpj, columnPhone2, columnAddress2);
-
+        tableViewPhysical.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableViewLegal.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         addButtonsToTablePhysical();
         addButtonsToTableLegal();
 
@@ -281,7 +260,7 @@ public class ClientController extends AccessProviderController implements Initia
         colBtnUpdate.setCellFactory(cellFactoryUpdate);
         colBtnDelete.setCellFactory(cellFactoryDelete);
 
-        tableViewPhysical.getColumns().addAll(colBtnUpdate, colBtnDelete);
+        tableViewPhysical.getColumns().addAll(colBtnUpdate);
     }
 
     private void addButtonsToTableLegal() {
@@ -351,7 +330,7 @@ public class ClientController extends AccessProviderController implements Initia
         colBtnUpdate.setCellFactory(cellFactoryUpdate);
         colBtnDelete.setCellFactory(cellFactoryDelete);
 
-        tableViewLegal.getColumns().addAll(colBtnUpdate, colBtnDelete);
+        tableViewLegal.getColumns().addAll(colBtnUpdate);
     }
 
     private void onClickSelectForUpdate(Object object){
@@ -383,5 +362,34 @@ public class ClientController extends AccessProviderController implements Initia
             new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
         }
     }
-    
+
+    @FXML
+    void clearPhysical(ActionEvent event) {
+        physical = null;
+        inputNamePhysical.setText("");
+        inputCpfPhysical.setText("");
+        inputPhonePhysical.setText("");
+        inputAddressPhysical.setText("");
+    }
+
+    @FXML
+    void onClickCancelPhysical(ActionEvent event) {
+        clearPhysical();
+        goToTab(0);
+    }
+
+    @FXML
+    void onClickCancelLegal(ActionEvent event) {
+        clearLegal();
+        goToTab(2);
+    }
+
+    @FXML
+    void clearLegal(ActionEvent event) {
+        legal = null;
+        inputCompanyNameLegal.setText("");
+        inputCnpjLegal.setText("");
+        inputPhoneLegal.setText("");
+        inputAddressLegal.setText("");
+    }
 }

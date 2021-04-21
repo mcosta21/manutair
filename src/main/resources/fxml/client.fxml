@@ -73,6 +73,8 @@
                               <TextField fx:id="inputAddressPhysical" prefHeight="49.0" prefWidth="449.0" />
                            </children>
                         </VBox>
+                        <Button layoutX="722.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickCancelPhysical" prefHeight="48.0" prefWidth="199.0" text="Cancelar" />
+                        <Button layoutX="229.0" layoutY="505.0" mnemonicParsing="false" onAction="#clearPhysical" prefHeight="48.0" prefWidth="199.0" styleClass="btn-secondary" text="Limpar" />
                      </children>
                   </AnchorPane>
             </content>
@@ -115,6 +117,8 @@
                               <TextField fx:id="inputAddressLegal" prefHeight="49.0" prefWidth="449.0" />
                            </children>
                         </VBox>
+                        <Button layoutX="723.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickCancelLegal" prefHeight="48.0" prefWidth="199.0" text="Cancelar" />
+                        <Button layoutX="229.0" layoutY="511.0" mnemonicParsing="false" onAction="#clearLegal" prefHeight="48.0" prefWidth="199.0" styleClass="btn-secondary" text="Limpar" />
                      </children>
                   </AnchorPane>
                </content>

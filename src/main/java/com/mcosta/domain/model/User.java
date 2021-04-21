@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode
 public class User {
 
     @Getter @Setter
@@ -40,5 +40,8 @@ public class User {
         this.userType = userType;
     }
 
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -35,19 +35,26 @@ Label {
     -fx-alignment: center;
 }
 
-.button Text {
-    -fx-font: 14px 'Roboto';
-}
-
 .button {
     -fx-font: 14px 'Roboto';
+    -fx-font-weight: 700;
     -fx-cursor: hand;
     -fx-fill-transition: 4s;
-    -fx-background-color: #fff;
+    -fx-background-color: #585b6b;
+    -fx-text-fill: #fff;
 }
 
 .button:hover {
-    -fx-background-color: #e5e5e5;
+    -fx-background-color: #44475a;
+}
+
+.btn-secondary {
+    -fx-background-color: #1d1e26;
+    -fx-text-fill: #fff;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #585b6b;
 }
 
 .text-field {

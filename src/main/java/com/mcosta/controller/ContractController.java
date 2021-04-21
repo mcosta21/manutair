@@ -11,6 +11,7 @@ import com.mcosta.domain.dao.ClientDao;
 import com.mcosta.domain.dao.ContractDao;
 import com.mcosta.domain.dao.EquipmentDao;
 import com.mcosta.domain.model.*;
+import com.mcosta.domain.validator.EquipmentValidator;
 import com.mcosta.util.AccessProvider;
 import com.mcosta.util.ManagerWindow;
 import com.mcosta.util.MessageAlert;
@@ -39,6 +40,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -49,6 +51,8 @@ public class ContractController extends AccessProviderController implements Init
     private ContractDao contractDao = new ContractDao();
     private ClientDao clientDao = new ClientDao();
     private EquipmentDao equipmentDao = new EquipmentDao();
+    List<Equipment> equipments = new ArrayList<Equipment>();
+    private EquipmentValidator equipmentValidator = new EquipmentValidator();
 
     @FXML
     private Label lblUsername;
@@ -87,6 +91,9 @@ public class ContractController extends AccessProviderController implements Init
     private ListView listViewEquipaments;
 
     @FXML
+    private Pane modalCreateEquipment;
+
+    @FXML
     private void onClickSave(ActionEvent event) {
         LocalDate effectiveStartDate = inputEffectiveStartDate.getValue();
         Integer durationMonths = inputDurationMonth.getSelectionModel().getSelectedItem();
@@ -96,6 +103,12 @@ public class ContractController extends AccessProviderController implements Init
             if(contract == null) {
                 contract = new Contract(effectiveStartDate, durationMonths, client);
                 contractDao.create(contract);
+
+                for(Equipment e : equipments){
+                    e.setContract(contract);
+                    equipmentDao.create(e);
+                }
+
                 new MessageAlert("Sucesso", "Contrato cadastrado com sucesso.", AlertType.INFORMATION).sendMessageAlert();
             }
             else {
@@ -103,6 +116,18 @@ public class ContractController extends AccessProviderController implements Init
                 contract.setDurationInMonths(durationMonths);
                 contract.setClient(client);
                 contractDao.update(contract);
+
+                for(Equipment e : equipments){
+                    if(e.getIdEquipment() == null) {
+                        e.setContract(contract);
+                        equipmentDao.create(e);
+                    }
+                    else {
+                        equipmentDao.update(e);
+                    }
+
+                }
+
                 new MessageAlert("Sucesso", "Contrato atualizado com sucesso.", AlertType.INFORMATION).sendMessageAlert();
             }
             updateTable();
@@ -115,25 +140,31 @@ public class ContractController extends AccessProviderController implements Init
 
     @FXML
     private void onClickSaveEquipment(ActionEvent event) {
-        LocalDate effectiveStartDate = inputEffectiveStartDate.getValue();
-        Integer durationMonths = inputDurationMonth.getSelectionModel().getSelectedItem();
-        Client client = inputClient.getSelectionModel().getSelectedItem();
+        String description = inputDescription.getText();
+        String model = inputModel.getText();
+        String brand = inputBrand.getText();
+        String serialNumber= inputSerialNumber.getText();
 
-        try {
+        Equipment equipment = new Equipment(description, model, brand, serialNumber, null);
 
-        } catch (Exception e) {
-            new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
+        if(!equipmentValidator.isValidFast(equipment)) {
+            new MessageAlert("Erro", equipmentValidator.getMessage()).sendMessageAlert();
+            return;
         }
+        equipments.add(equipment);
+        getEquipments();
+        modalCreateEquipment.setVisible(false);
     }
 
     @FXML
     private void onClickCancelEquipment(ActionEvent event) {
-
+        modalCreateEquipment.setVisible(false);
     }
 
     @FXML
     private void openModalCreateEquipment(ActionEvent event) throws IOException {
-
+        modalCreateEquipment.setVisible(true);
+        clearEquipment();
     }
 
     @Override
@@ -141,17 +172,24 @@ public class ContractController extends AccessProviderController implements Init
         lblUsername.setText(AccessProvider.getUser().getName());
         lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
 
+        modalCreateEquipment.setVisible(false);
+        modalCreateEquipment.setLayoutX(0);
+        modalCreateEquipment.setLayoutY(0);
+
         populateTableView();
         getClients();
         getMonths();
     }    
 
     private void clear(){
-        contract = null;
-        inputEffectiveStartDate.setValue(null);
-        inputDurationMonth.getSelectionModel().clearSelection();
-        inputClient.getSelectionModel().clearSelection();
-        // inputEquipament
+        clear(null);
+    }
+
+    private void clearEquipment(){
+        inputDescription.setText("");
+        inputBrand.setText("");
+        inputModel.setText("");
+        inputSerialNumber.setText("");
     }
 
     private void getMonths(){
@@ -185,8 +223,7 @@ public class ContractController extends AccessProviderController implements Init
         });
     }
 
-    private void getEquipments(Long idContract) {
-        List<Equipment> equipments = equipmentDao.index(idContract);
+    private void getEquipments() {
         ObservableList<Equipment> obs = FXCollections.observableArrayList(equipments);
         listViewEquipaments.setItems(obs);
     }
@@ -204,17 +241,21 @@ public class ContractController extends AccessProviderController implements Init
     }
 
     private void populateTableView(){
-        Double widthColumn = tableView.prefWidthProperty().divide(2 + 0.20).getValue();
-        
-        TableColumn columnName = new TableColumn("DATA DE INÍCIO");
-        columnName.setMinWidth(widthColumn);
-        columnName.setCellValueFactory(new PropertyValueFactory<Contract, LocalDate>("effectiveStartDate"));
 
-        TableColumn columnDuration = new TableColumn("DURAÇÃO (MESES)");
-        columnDuration.setMinWidth(widthColumn);
-        columnDuration.setCellValueFactory(new PropertyValueFactory<Contract, Integer>("durationInMonths"));
+        TableColumn columnIdContract = new TableColumn("N° DO CONTRATO");
+        columnIdContract.setCellValueFactory(new PropertyValueFactory<Contract, LocalDate>("idContract"));
 
-        tableView.getColumns().addAll(columnName, columnDuration);
+        TableColumn columnEffectiveStartDate = new TableColumn("DATA DE INÍCIO");
+        columnEffectiveStartDate.setCellValueFactory(new PropertyValueFactory<Contract, String>("effectiveStartDateFormatted"));
+
+        TableColumn columnDuration = new TableColumn("DURAÇÃO");
+        columnDuration.setCellValueFactory(new PropertyValueFactory<Contract, String>("durationInMonthsText"));
+
+        TableColumn columnClient = new TableColumn("CLIENTE");
+        columnClient.setCellValueFactory(new PropertyValueFactory<Contract, String>("clientName"));
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.getColumns().addAll(columnIdContract, columnEffectiveStartDate, columnDuration, columnClient);
 
         addButtonsToTable();
 
@@ -262,12 +303,12 @@ public class ContractController extends AccessProviderController implements Init
     }
 
     private void onClickSelectForUpdate(Object object){
-
         this.contract = (Contract) object;
+        this.equipments = equipmentDao.index(contract.getIdContract());
         inputEffectiveStartDate.setValue(contract.getEffectiveStartDate());
         inputDurationMonth.getSelectionModel().select(contract.getDurationInMonths());
         inputClient.getSelectionModel().select(contract.getClient());
-        getEquipments(contract.getIdContract());
+        getEquipments();
         goToTab(1);
     }
 
@@ -279,5 +320,21 @@ public class ContractController extends AccessProviderController implements Init
         ObservableList<Contract> obs = FXCollections.observableArrayList(contractDao.index());
         tableView.setItems(obs);
         tableView.refresh();
+    }
+
+    @FXML
+    void onClickCancel(ActionEvent event) {
+        clear();
+        goToTab(0);
+    }
+
+    @FXML
+    void clear(ActionEvent event) {
+        contract = null;
+        equipments = new ArrayList<>();
+        inputEffectiveStartDate.setValue(null);
+        inputDurationMonth.getSelectionModel().clearSelection();
+        inputClient.getSelectionModel().select(null);
+        listViewEquipaments.setItems(null);
     }
 }

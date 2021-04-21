@@ -35,14 +35,8 @@ public class MainController extends AccessProviderController implements Initiali
 
     private ObservableList<Button> obsListActionButtons = FXCollections.observableArrayList();
 
-    private UserDao userDao = new UserDao();
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        User user = userDao.index().get(0);
-        System.out.println(user.getName());
-        AccessProvider.setUser(user);
-
         lblUsername.setText(AccessProvider.getUser().getName());
         lblUserType.setText(AccessProvider.getUser().getUserType().getValue());
 

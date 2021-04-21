@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.mcosta.util.MaskedTextField?>
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mcosta.controller.ServiceOrderController">
    <children>
       <Pane prefHeight="70.0" prefWidth="1366.0" styleClass="header">
@@ -60,7 +61,7 @@
                               <TextArea fx:id="inputProblemDescription" prefHeight="78.0" prefWidth="908.0" />
                            </children>
                         </VBox>
-                        <Button layoutX="938.0" layoutY="553.0" mnemonicParsing="false" onAction="#onClickSave" prefHeight="48.0" prefWidth="199.0" text="Salvar" />
+                        <Button layoutX="938.0" layoutY="544.0" mnemonicParsing="false" onAction="#onClickSave" prefHeight="48.0" prefWidth="199.0" text="Salvar" />
                         <VBox layoutX="229.0" layoutY="112.0" prefHeight="98.0" prefWidth="908.0">
                            <children>
                               <Label prefHeight="42.0" prefWidth="305.0" text="Contrato *" />
@@ -97,13 +98,7 @@
                               <ComboBox fx:id="inputTechnician" prefHeight="49.0" prefWidth="910.0" />
                            </children>
                         </VBox>
-                        <Button layoutX="939.0" layoutY="478.0" mnemonicParsing="false" onAction="#onClickAllocateTechnician" prefHeight="48.0" prefWidth="199.0" text="Confirmar" />
-                        <VBox layoutX="229.0" layoutY="339.0" prefHeight="98.0" prefWidth="908.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="305.0" text="Data do serviço *" />
-                              <DatePicker fx:id="inputServiceDate" prefHeight="49.0" prefWidth="993.0" />
-                           </children>
-                        </VBox>
+                        <Button layoutX="939.0" layoutY="478.0" mnemonicParsing="false" onAction="#onClickSaveAllocateTechnician" prefHeight="48.0" prefWidth="199.0" text="Confirmar" />
                         <Label layoutX="229.0" layoutY="36.0" prefHeight="30.0" prefWidth="281.0" text="Ordem de Serviço" />
                         <Label fx:id="valueIdServiceOrder" layoutX="229.0" layoutY="66.0" prefHeight="30.0" prefWidth="281.0" text="-">
                            <font>
@@ -141,6 +136,80 @@
                            </font>
                         </Label>
                         <Label layoutX="791.0" layoutY="127.0" prefHeight="30.0" prefWidth="281.0" text="Endereço do equipamento" />
+                        <HBox layoutX="229.0" layoutY="339.0" prefHeight="95.0" prefWidth="908.0" spacing="20.0">
+                           <children>
+                              <VBox prefHeight="98.0" prefWidth="908.0">
+                                 <children>
+                                    <Label prefHeight="42.0" prefWidth="305.0" text="Data do serviço *" />
+                                    <DatePicker fx:id="inputServiceDate" editable="false" prefHeight="49.0" prefWidth="993.0" showWeekNumbers="true" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="98.0" prefWidth="908.0">
+                                 <children>
+                                    <Label prefHeight="42.0" prefWidth="305.0" text="Horário de atendimento *" />
+                                    <MaskedTextField fx:id="inputTime" prefHeight="50.0" prefWidth="444.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Finalizar ordem de serviço">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1366.0">
+                     <children>
+                        <VBox layoutX="229.0" layoutY="232.0" prefHeight="141.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="220.0" text="Descriçao da solução *" />
+                              <TextArea fx:id="inputSolutionDescription" prefHeight="101.0" prefWidth="908.0" />
+                           </children>
+                        </VBox>
+                        <Button layoutX="939.0" layoutY="508.0" mnemonicParsing="false" onAction="#onClickSaveFinishServiceOrder" prefHeight="48.0" prefWidth="199.0" text="Confirmar" />
+                        <Label layoutX="229.0" layoutY="36.0" prefHeight="30.0" prefWidth="281.0" text="Ordem de Serviço" />
+                        <Label fx:id="valueIdServiceOrder1" layoutX="229.0" layoutY="66.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="valueEquipment1" layoutX="510.0" layoutY="66.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="510.0" layoutY="36.0" prefHeight="30.0" prefWidth="281.0" text="Equipamento" />
+                        <Label layoutX="791.0" layoutY="36.0" prefHeight="30.0" prefWidth="281.0" text="Cliente" />
+                        <Label fx:id="valueClient1" layoutX="791.0" layoutY="66.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="valueContract1" layoutX="229.0" layoutY="157.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="229.0" layoutY="127.0" prefHeight="30.0" prefWidth="281.0" text="Contrato" />
+                        <Label layoutX="510.0" layoutY="127.0" prefHeight="30.0" prefWidth="281.0" text="Data de abertura" />
+                        <Label fx:id="valueCreationDate1" layoutX="510.0" layoutY="157.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="725.0" layoutY="508.0" mnemonicParsing="false" onAction="#onClickCancelFinishServiceOrder" prefHeight="48.0" prefWidth="199.0" text="Cancelar" />
+                        <Label fx:id="valueEquipmentAddress1" layoutX="791.0" layoutY="157.0" prefHeight="30.0" prefWidth="281.0" text="-">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="791.0" layoutY="127.0" prefHeight="30.0" prefWidth="281.0" text="Endereço do equipamento" />
+                        <VBox layoutX="229.0" layoutY="393.0" prefHeight="98.0" prefWidth="908.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="305.0" text="Data da conclusão *" />
+                              <DatePicker fx:id="inputFinishDate" editable="false" prefHeight="49.0" prefWidth="993.0" showWeekNumbers="true" />
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
                </content>

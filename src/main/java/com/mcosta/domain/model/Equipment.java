@@ -40,4 +40,12 @@ public class Equipment {
     public String toString() {
         return description + " " + brand + " " + model + " " + serialNumber;
     }
+
+    public Long getIdContract(){
+        return this.contract.getIdContract();
+    }
+
+    public String getClient(){
+        return this.contract.getClientName();
+    }
 }

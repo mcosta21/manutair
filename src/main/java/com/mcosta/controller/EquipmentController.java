@@ -86,6 +86,7 @@ public class EquipmentController extends AccessProviderController implements Ini
             goToTab(0);
             clear();
         } catch (Exception e) {
+            equipment = null;
             new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
         }
     }
@@ -93,7 +94,14 @@ public class EquipmentController extends AccessProviderController implements Ini
     @FXML
     private void onSelectClient(ActionEvent event) {
         Client client = inputClient.getSelectionModel().getSelectedItem();
-        if(client != null) getContracts(client.getIdClient());
+        if(client != null) {
+
+            if(equipment != null && !client.equals(equipment.getContract().getClient())){
+                inputContract.getSelectionModel().select(null);
+            }
+            getContracts(client.getIdClient());
+
+        }
     }
 
     @Override
@@ -105,6 +113,11 @@ public class EquipmentController extends AccessProviderController implements Ini
     }
 
     private void clear(){
+        clear(null);
+    }
+
+    @FXML
+    private void clear(ActionEvent event){
         equipment = null;
         inputDescription.setText("");
         inputBrand.setText("");
@@ -161,26 +174,26 @@ public class EquipmentController extends AccessProviderController implements Ini
     }
 
     private void populateTableView(){
-        Double widthColumn = tableView.prefWidthProperty().divide(4 + 0.20).getValue();
-        
         TableColumn columnDescription = new TableColumn("DESCRIÇÃO");
-        columnDescription.setMinWidth(widthColumn);
         columnDescription.setCellValueFactory(new PropertyValueFactory<Equipment, String>("description"));
 
         TableColumn columnBrand = new TableColumn("MARCA");
-        columnBrand.setMinWidth(widthColumn);
         columnBrand.setCellValueFactory(new PropertyValueFactory<Equipment, String>("brand"));
 
         TableColumn columnModel = new TableColumn("MODELO");
-        columnModel.setMinWidth(widthColumn);
         columnModel.setCellValueFactory(new PropertyValueFactory<Equipment, String>("model"));
 
         TableColumn columnSerialNumber = new TableColumn("NÚMERO DE SÉRIE");
-        columnSerialNumber.setMinWidth(widthColumn);
         columnSerialNumber.setCellValueFactory(new PropertyValueFactory<Equipment, String>("serialNumber"));
 
+        TableColumn columnClient = new TableColumn("CLIENTE");
+        columnClient.setCellValueFactory(new PropertyValueFactory<String, String>("client"));
 
-        tableView.getColumns().addAll(columnDescription, columnBrand, columnModel, columnSerialNumber);
+        TableColumn columnContract = new TableColumn("CONTRATO");
+        columnContract.setCellValueFactory(new PropertyValueFactory<Long, String>("idContract"));
+
+        tableView.getColumns().addAll(columnDescription, columnBrand, columnModel, columnSerialNumber, columnClient, columnContract);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         addButtonsToTable();
 
@@ -241,4 +254,9 @@ public class EquipmentController extends AccessProviderController implements Ini
         goToTab(1);
     }
 
+    @FXML
+    private void onClickCancel(ActionEvent event) {
+        goToTab(0);
+        clear();
+    }
 }

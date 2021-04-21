@@ -49,6 +49,7 @@ public abstract class AccessProvider {
     private static List<Page> pagesForSupervisor(){
         List<Page> pages = new ArrayList<Page>();
         pages.add(new Page("service-order", "Ordem de Serviço"));
+        pages.add(new Page("user", "Usuários"));
         return pages;
     }
 
@@ -60,7 +61,6 @@ public abstract class AccessProvider {
 
     private static List<Page> pagesForAdmin(){
         Set<Page> pages = new HashSet<Page>();
-        pages.add(new Page("user", "Usuários"));
         pages.addAll(pagesForAttendant());
         pages.addAll(pagesForSupervisor());
         pages.addAll(pagesForTechnician());

@@ -75,6 +75,32 @@ public class UserDao implements Dao {
         return items;
     }
 
+    public User getUserById(Long id){
+        File file = new File(FILE_NAME);
+        if(!file.exists()) return null;
+
+        XStream xs = new XStream();
+        for(User u : (Set<User>) xs.fromXML(file)){
+            if(u.getIdUser().equals(id)){
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public List<User> getUsersTechnician() {
+        File file = new File(FILE_NAME);
+        if(!file.exists()) return new ArrayList<User>();
+
+        XStream xs = new XStream();
+        List<User> items = new ArrayList<>();
+        for(User u : (Set<User>) xs.fromXML(file)){
+            if(u.isTechnician() && u.getUserType() == UserTypeEnum.TECHNICIAN) items.add(u);
+        }
+
+        return items;
+    }
+
     private void persist() throws Exception {
         XStream xs = new XStream();
         String xml = xs.toXML(users);
@@ -83,4 +109,29 @@ public class UserDao implements Dao {
         fw.close();        
     }
 
+    public User getUserByUsername(String username) {
+        File file = new File(FILE_NAME);
+        if(!file.exists()) return null;
+
+        XStream xs = new XStream();
+        for(User u : (Set<User>) xs.fromXML(file)){
+            if(u.getUsername().toUpperCase().equals(username.toUpperCase())) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByUsernameAndPassword(String username, String password) {
+        File file = new File(FILE_NAME);
+        if(!file.exists()) return null;
+
+        XStream xs = new XStream();
+        for(User u : (Set<User>) xs.fromXML(file)){
+            if(u.getUsername().toUpperCase().equals(username.toUpperCase()) && u.getPassword().equals(password)) {
+                return u;
+            }
+        }
+        return null;
+    }
 }

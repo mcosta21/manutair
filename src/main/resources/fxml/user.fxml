@@ -73,6 +73,8 @@
                            </children>
                         </VBox>
                         <Button layoutX="938.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickSave" prefHeight="48.0" prefWidth="199.0" text="Salvar" />
+                        <Button layoutX="726.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickCancel" prefHeight="48.0" prefWidth="199.0" text="Cancelar" />
+                        <Button layoutX="229.0" layoutY="511.0" mnemonicParsing="false" onAction="#clear" prefHeight="48.0" prefWidth="199.0" styleClass="btn-secondary" text="Limpar" />
                      </children>
                   </AnchorPane>
             </content>

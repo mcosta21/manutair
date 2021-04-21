@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mcosta.controller.LoginController">
-    <children>
-        <Label fx:id="lblMostrar" layoutX="516.0" layoutY="136.0" minHeight="16" minWidth="69" prefHeight="52.0" prefWidth="215.0" />
-      <Pane layoutX="387.0" layoutY="65.0" prefHeight="618.0" prefWidth="593.0" style="-fx-background-color: #fff;">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #1d1e26;" stylesheets="@../styles/custom.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mcosta.controller.LoginController">
+   <children>
+      <Pane layoutX="400.0" layoutY="135.0" prefHeight="499.0" prefWidth="567.0" style="-fx-background-color: #282a36;">
          <children>
-              <Button layoutX="147.0" layoutY="524.0" onAction="#OnClickBackToPrimary" prefHeight="43.0" prefWidth="299.0" styleClass="toggle-button" text="Entrar" />
+            <ImageView fitHeight="30.0" fitWidth="122.0" layoutX="222.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ManutAir.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="43.0" layoutY="390.0" mnemonicParsing="false" onAction="#onClickLogin" prefHeight="48.0" prefWidth="494.0" text="Entrar" />
+            <VBox layoutX="36.0" layoutY="127.0" prefHeight="98.0" prefWidth="494.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="220.0" text="Usuario" />
+                  <TextField fx:id="inputLogin" prefHeight="50.0" prefWidth="459.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="37.0" layoutY="243.0" prefHeight="98.0" prefWidth="494.0">
+               <children>
+                  <Label prefHeight="42.0" prefWidth="220.0" text="Senha" />
+                  <PasswordField fx:id="inputPassword" prefHeight="52.0" prefWidth="494.0" />
+               </children>
+            </VBox>
          </children>
+         <effect>
+            <DropShadow color="#00000071" height="184.08" radius="91.54" width="184.08" />
+         </effect>
       </Pane>
-    </children>
+   </children>
 </AnchorPane>

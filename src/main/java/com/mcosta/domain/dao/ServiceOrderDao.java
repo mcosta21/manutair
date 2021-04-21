@@ -1,5 +1,6 @@
 package com.mcosta.domain.dao;
 
+import com.mcosta.domain.enumeration.StatusServiceOrderEnum;
 import com.mcosta.domain.model.ServiceOrder;
 import com.mcosta.domain.validator.ServiceOrderValidator;
 import com.thoughtworks.xstream.XStream;
@@ -35,6 +36,9 @@ public class ServiceOrderDao implements Dao {
     
     @Override
     public void update(Object object) throws Exception {
+        ServiceOrder _serviceOrder = (ServiceOrder) object;
+        serviceOrders.remove(_serviceOrder);
+        serviceOrders.add(_serviceOrder);
         persist();
     }
 
@@ -59,7 +63,7 @@ public class ServiceOrderDao implements Dao {
         return items;
     }
 
-    public List<ServiceOrder> index(Long idUser) {
+    public List<ServiceOrder> getServiceOrdersByTechnician(Long idUser) {
         File file = new File(FILE_NAME);
 
         if(!file.exists()) return new ArrayList<ServiceOrder>();
@@ -68,7 +72,22 @@ public class ServiceOrderDao implements Dao {
 
         List<ServiceOrder> items = new ArrayList<>();
         for(ServiceOrder e : (Set<ServiceOrder>) xs.fromXML(file)){
-            if(e.getUser().getIdUser().equals(idUser)) items.add(e);
+            if(e.getUser() != null && e.getUser().getIdUser().equals(idUser) && e.getStatusServiceOrderEnum() == StatusServiceOrderEnum.IN_PROGRESS) items.add(e);
+        }
+
+        return items;
+    }
+
+    public List<ServiceOrder> getServiceOrdersByStatusOpened() {
+        File file = new File(FILE_NAME);
+
+        if(!file.exists()) return new ArrayList<ServiceOrder>();
+
+        XStream xs = new XStream();
+
+        List<ServiceOrder> items = new ArrayList<>();
+        for(ServiceOrder e : (Set<ServiceOrder>) xs.fromXML(file)){
+            if(e.getStatusServiceOrderEnum() == StatusServiceOrderEnum.OPENED) items.add(e);
         }
 
         return items;

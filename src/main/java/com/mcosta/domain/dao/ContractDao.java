@@ -31,7 +31,6 @@ public class ContractDao implements Dao {
         contract.setIdContract(Long.valueOf(index().size()+1));
         contracts.add(contract);
         persist();
-
     }
     
     @Override

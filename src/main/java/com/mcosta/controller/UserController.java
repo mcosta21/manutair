@@ -84,6 +84,7 @@ public class UserController extends AccessProviderController implements Initiali
             goToTab(0);
             clear();
         } catch (Exception e) {
+            user = null;
             new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
         }
     }
@@ -102,11 +103,7 @@ public class UserController extends AccessProviderController implements Initiali
     }
 
     private void clear(){
-        user = null;
-        inputLogin.setText("");
-        inputPassword.setText("");
-        inputName.setText("");
-        inputUserType.getSelectionModel().clearSelection();
+        clear(null);
     }
 
     private void goToTab(int index){
@@ -114,22 +111,17 @@ public class UserController extends AccessProviderController implements Initiali
     }
 
     private void populateTableView(){
-        Double widthColumn = tableView.prefWidthProperty().divide(3 + 0.40).getValue();
-        
         TableColumn columnUsername = new TableColumn("USUÁRIO");
-        columnUsername.setMinWidth(widthColumn);
         columnUsername.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
 
         TableColumn columnName = new TableColumn("NOME");
-        columnName.setMinWidth(widthColumn);
         columnName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
 
         TableColumn columnUserType = new TableColumn("TIPO DE USUÁRIO");
-        columnUserType.setMinWidth(widthColumn);
         columnUserType.setCellValueFactory(new PropertyValueFactory<User, String>("userType"));
 
         tableView.getColumns().addAll(columnUsername, columnName, columnUserType);
-
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         addButtonsToTable();
 
         updateTable();
@@ -208,7 +200,7 @@ public class UserController extends AccessProviderController implements Initiali
         colBtnUpdate.setCellFactory(cellFactoryUpdate);
         colBtnDelete.setCellFactory(cellFactoryDelete);
 
-        tableView.getColumns().addAll(colBtnUpdate, colBtnDelete);
+        tableView.getColumns().addAll(colBtnUpdate);
     }
 
     private void onClickSelectForUpdate(User _user){
@@ -228,5 +220,20 @@ public class UserController extends AccessProviderController implements Initiali
         } catch (Exception e) {
             new MessageAlert("Erro", e.getMessage()).sendMessageAlert();
         }
+    }
+
+    @FXML
+    void onClickCancel(ActionEvent event) {
+        clear();
+        goToTab(0);
+    }
+
+    @FXML
+    void clear(ActionEvent event) {
+        user = null;
+        inputLogin.setText("");
+        inputPassword.setText("");
+        inputName.setText("");
+        inputUserType.getSelectionModel().clearSelection();
     }
 }

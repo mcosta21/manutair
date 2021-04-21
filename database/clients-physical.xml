@@ -1,5 +1,12 @@
 <set>
   <com.mcosta.domain.model.Physical>
+    <idClient>3</idClient>
+    <phone>(22) 2762-2460</phone>
+    <address>teste</address>
+    <name>Dimes</name>
+    <cpf>148.881.407-40</cpf>
+  </com.mcosta.domain.model.Physical>
+  <com.mcosta.domain.model.Physical>
     <idClient>1</idClient>
     <phone>412414</phone>
     <address>412141</address>
