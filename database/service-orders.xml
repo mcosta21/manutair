@@ -1,0 +1,91 @@
+<set>
+  <com.mcosta.domain.model.ServiceOrder>
+    <idServiceOrder>1</idServiceOrder>
+    <equipmentLocationAddress>RUA 1</equipmentLocationAddress>
+    <problemDescription>Problema 1</problemDescription>
+    <solutionDescription>Problema 1 resolvido</solutionDescription>
+    <creationDate>2021-04-21T16:28:39.7121318</creationDate>
+    <serviceDate>2021-04-22T20:00:00.3419206</serviceDate>
+    <finishDate>2021-05-01</finishDate>
+    <equipment>
+      <idEquipment>1</idEquipment>
+      <description>EQUI 1 CLI 1</description>
+      <brand>M1</brand>
+      <model>M1</model>
+      <serialNumber>N1</serialNumber>
+      <contract>
+        <idContract>1</idContract>
+        <effectiveStartDate>2021-04-23</effectiveStartDate>
+        <durationInMonths>3</durationInMonths>
+        <client class="com.mcosta.domain.model.Physical">
+          <idClient>1</idClient>
+          <phone>(22) 9999-9998</phone>
+          <address>Rua 1</address>
+          <name>Cliente 1 - PF</name>
+          <cpf>351.811.660-67</cpf>
+        </client>
+      </contract>
+    </equipment>
+    <user>
+      <idUser>5</idUser>
+      <username>joao</username>
+      <password>123</password>
+      <name>João</name>
+      <isTechnician>true</isTechnician>
+      <userType>TECHNICIAN</userType>
+    </user>
+    <statusServiceOrderEnum>CONCLUDED</statusServiceOrderEnum>
+  </com.mcosta.domain.model.ServiceOrder>
+  <com.mcosta.domain.model.ServiceOrder>
+    <idServiceOrder>2</idServiceOrder>
+    <equipmentLocationAddress>Rua 2</equipmentLocationAddress>
+    <problemDescription>Problema 2</problemDescription>
+    <creationDate>2021-04-21T16:28:55.6900541</creationDate>
+    <equipment>
+      <idEquipment>2</idEquipment>
+      <description>EQUI 2 CLI 1</description>
+      <brand>M2</brand>
+      <model>M2</model>
+      <serialNumber>N2</serialNumber>
+      <contract>
+        <idContract>1</idContract>
+        <effectiveStartDate>2021-04-23</effectiveStartDate>
+        <durationInMonths>3</durationInMonths>
+        <client class="com.mcosta.domain.model.Physical">
+          <idClient>1</idClient>
+          <phone>(22) 9999-9998</phone>
+          <address>Rua 1</address>
+          <name>Cliente 1 - PF</name>
+          <cpf>351.811.660-67</cpf>
+        </client>
+      </contract>
+    </equipment>
+    <statusServiceOrderEnum>OPENED</statusServiceOrderEnum>
+  </com.mcosta.domain.model.ServiceOrder>
+  <com.mcosta.domain.model.ServiceOrder>
+    <idServiceOrder>3</idServiceOrder>
+    <equipmentLocationAddress>Rua 3</equipmentLocationAddress>
+    <problemDescription>Problema 3</problemDescription>
+    <creationDate>2021-04-21T16:29:11.6364387</creationDate>
+    <equipment>
+      <idEquipment>1</idEquipment>
+      <description>EQUI 1 CLI 1</description>
+      <brand>M1</brand>
+      <model>M1</model>
+      <serialNumber>N1</serialNumber>
+      <contract>
+        <idContract>1</idContract>
+        <effectiveStartDate>2021-04-23</effectiveStartDate>
+        <durationInMonths>3</durationInMonths>
+        <client class="com.mcosta.domain.model.Physical">
+          <idClient>1</idClient>
+          <phone>(22) 9999-9998</phone>
+          <address>Rua 1</address>
+          <name>Cliente 1 - PF</name>
+          <cpf>351.811.660-67</cpf>
+        </client>
+      </contract>
+    </equipment>
+    <statusServiceOrderEnum>OPENED</statusServiceOrderEnum>
+  </com.mcosta.domain.model.ServiceOrder>
+</set>

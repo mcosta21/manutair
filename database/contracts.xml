@@ -1,0 +1,14 @@
+<set>
+  <com.mcosta.domain.model.Contract>
+    <idContract>1</idContract>
+    <effectiveStartDate>2021-04-23</effectiveStartDate>
+    <durationInMonths>3</durationInMonths>
+    <client class="com.mcosta.domain.model.Physical">
+      <idClient>1</idClient>
+      <phone>(22) 9999-9998</phone>
+      <address>Rua 1</address>
+      <name>Cliente 1 - PF</name>
+      <cpf>351.811.660-67</cpf>
+    </client>
+  </com.mcosta.domain.model.Contract>
+</set>

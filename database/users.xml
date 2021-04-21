@@ -1,10 +1,58 @@
 <set>
   <com.mcosta.domain.model.User>
+    <idUser>2</idUser>
+    <username>alan</username>
+    <password>123</password>
+    <name>Alan</name>
+    <isTechnician>false</isTechnician>
+    <userType>SUPERVISOR</userType>
+  </com.mcosta.domain.model.User>
+  <com.mcosta.domain.model.User>
+    <idUser>4</idUser>
+    <username>flavia</username>
+    <password>123</password>
+    <name>Flávia</name>
+    <isTechnician>false</isTechnician>
+    <userType>ATTENDANT</userType>
+  </com.mcosta.domain.model.User>
+  <com.mcosta.domain.model.User>
+    <idUser>6</idUser>
+    <username>adriel</username>
+    <password>123</password>
+    <name>Adriel</name>
+    <isTechnician>true</isTechnician>
+    <userType>TECHNICIAN</userType>
+  </com.mcosta.domain.model.User>
+  <com.mcosta.domain.model.User>
     <idUser>1</idUser>
     <username>admin</username>
     <password>123</password>
     <name>Administrador</name>
-    <isTechnician>true</isTechnician>
+    <isTechnician>false</isTechnician>
     <userType>ADMIN</userType>
+  </com.mcosta.domain.model.User>
+  <com.mcosta.domain.model.User>
+    <idUser>3</idUser>
+    <username>marcio</username>
+    <password>123</password>
+    <name>Marcio</name>
+    <isTechnician>false</isTechnician>
+    <userType>ATTENDANT</userType>
+  </com.mcosta.domain.model.User>
+  <com.mcosta.domain.model.User>
+    <idUser>7</idUser>
+    <username>thiago</username>
+    <password>123</password>
+    <name>Thiago</name>
+    <isTechnician>true</isTechnician>
+    <userType>TECHNICIAN</userType>
+  </com.mcosta.domain.model.User>
+  <com.mcosta.domain.model.User>
+    <idUser>5</idUser>
+    <username>joao</username>
+    <password>123</password>
+    <name>João</name>
+    <isTechnician>true</isTechnician>
+    <userType>TECHNICIAN</userType>
   </com.mcosta.domain.model.User>
 </set>

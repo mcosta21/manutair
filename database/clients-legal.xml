@@ -1,0 +1,16 @@
+<set>
+  <com.mcosta.domain.model.Legal>
+    <idClient>3</idClient>
+    <phone>(22) 5555-5555</phone>
+    <address>Rua 3</address>
+    <companyName>Cliente 3 - PJ</companyName>
+    <cnpj>66.995.656/0001-08</cnpj>
+  </com.mcosta.domain.model.Legal>
+  <com.mcosta.domain.model.Legal>
+    <idClient>2</idClient>
+    <phone>(22) 8888-8888</phone>
+    <address>Rua 2</address>
+    <companyName>Cliente 2 - PJ</companyName>
+    <cnpj>20.245.874/0001-16</cnpj>
+  </com.mcosta.domain.model.Legal>
+</set>

@@ -51,6 +51,11 @@ public class ServiceOrderValidator {
             return false;
         }
 
+        if (hour.contains("_")) {
+            message = "Horário de atendimento é inválido.";
+            return false;
+        }
+
         String[] hoursArray = hour.split(":");
         if (hoursArray.length > 2 || Integer.valueOf(hoursArray[0]) > 23 || Integer.valueOf(hoursArray[1]) > 60) {
             message = "Horário informa é inválido.";

@@ -155,3 +155,30 @@ Label {
     -fx-background-color: transparent;
     -fx-text-fill: white;
 }
+
+.list-view {
+    -fx-background-color: #1d1e26;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #282a36;
+    -fx-text-fill: #fff;
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: #1d1e26;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #44475a;
+}
+
+.date-picker {
+    -fx-background-color: #1d1e26;
+    -fx-border-color:#1d1e26;
+}
+
+.date-picker > .arrow-button {
+    -fx-background-color: #1d1e26;
+    -fx-text-fill: #fff;
+}

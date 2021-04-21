@@ -1,0 +1,16 @@
+<set>
+  <com.mcosta.domain.model.Physical>
+    <idClient>1</idClient>
+    <phone>(22) 9999-9998</phone>
+    <address>Rua 1</address>
+    <name>Cliente 1 - PF</name>
+    <cpf>351.811.660-67</cpf>
+  </com.mcosta.domain.model.Physical>
+  <com.mcosta.domain.model.Physical>
+    <idClient>4</idClient>
+    <phone>(22) 6666-6666</phone>
+    <address>Rua 4</address>
+    <name>Cliente 4</name>
+    <cpf>147.771.300-02</cpf>
+  </com.mcosta.domain.model.Physical>
+</set>

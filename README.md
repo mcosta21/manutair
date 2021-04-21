@@ -73,7 +73,7 @@ Devido a vasta reuzabilidade de um recurso por grande parte do sistema, diversas
 1. admin (Administrador)
 2. alan (Supervisor)
 3. marcio (Atendente)
-3. marcio (Atendente)
+3. flavia (Atendente)
 4. joao (Técnico)
 5. adriel (Técnico)
 6. thiago (Técnico)
