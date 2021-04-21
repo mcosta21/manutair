@@ -7,10 +7,8 @@ import java.util.Objects;
 import com.mcosta.domain.enumeration.StatusServiceOrderEnum;
 
 import com.mcosta.util.DateFormatter;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 public class ServiceOrder {
 

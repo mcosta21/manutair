@@ -7,7 +7,6 @@ import com.mcosta.domain.enumeration.UserTypeEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @EqualsAndHashCode
 public class User {

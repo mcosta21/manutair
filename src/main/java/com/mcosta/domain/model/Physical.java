@@ -23,8 +23,5 @@ public class Physical extends Client {
     public String toString() {
         return cpf + " - " + name;
     }
-
-    
-    
     
 }

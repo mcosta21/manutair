@@ -95,7 +95,7 @@ public class UserDao implements Dao {
         XStream xs = new XStream();
         List<User> items = new ArrayList<>();
         for(User u : (Set<User>) xs.fromXML(file)){
-            if(u.isTechnician() && u.getUserType() == UserTypeEnum.TECHNICIAN) items.add(u);
+            if(u.isTechnician()) items.add(u);
         }
 
         return items;

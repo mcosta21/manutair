@@ -1,8 +1,0 @@
-<list>
-  <com.mcosta.model.ContaCorrente>
-    <numero>1</numero>
-    <saldo>0.0</saldo>
-    <limite>1000.0</limite>
-    <lancamentos/>
-  </com.mcosta.model.ContaCorrente>
-</list>

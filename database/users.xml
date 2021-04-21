@@ -1,26 +1,10 @@
 <set>
   <com.mcosta.domain.model.User>
     <idUser>1</idUser>
-    <username>mcosta</username>
+    <username>admin</username>
     <password>123</password>
-    <name>Marcio da Silva Costa</name>
-    <isTechnician>false</isTechnician>
-    <userType>SUPERVISOR</userType>
-  </com.mcosta.domain.model.User>
-  <com.mcosta.domain.model.User>
-    <idUser>3</idUser>
-    <username>adriel</username>
-    <password>123</password>
-    <name>Adriel teste</name>
+    <name>Administrador</name>
     <isTechnician>true</isTechnician>
-    <userType>TECHNICIAN</userType>
-  </com.mcosta.domain.model.User>
-  <com.mcosta.domain.model.User>
-    <idUser>3</idUser>
-    <username>joao</username>
-    <password>123</password>
-    <name>João</name>
-    <isTechnician>false</isTechnician>
-    <userType>ATTENDANT</userType>
+    <userType>ADMIN</userType>
   </com.mcosta.domain.model.User>
 </set>
