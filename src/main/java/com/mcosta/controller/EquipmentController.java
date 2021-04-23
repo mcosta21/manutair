@@ -3,8 +3,6 @@ package com.mcosta.controller;
 import com.mcosta.domain.dao.ClientDao;
 import com.mcosta.domain.dao.ContractDao;
 import com.mcosta.domain.dao.EquipmentDao;
-import com.mcosta.domain.dao.UserDao;
-import com.mcosta.domain.enumeration.UserTypeEnum;
 import com.mcosta.domain.model.*;
 import com.mcosta.util.AccessProvider;
 import com.mcosta.util.MessageAlert;
@@ -209,6 +207,8 @@ public class EquipmentController extends AccessProviderController implements Ini
     private void addButtonsToTable() {
         TableColumn<Equipment, Void> colBtnUpdate = new TableColumn();
         colBtnUpdate.setMinWidth(50);
+        TableColumn<Equipment, Void> colBtnDelete = new TableColumn();
+        colBtnDelete.setMinWidth(50);
 
         Callback<TableColumn<Equipment, Void>, TableCell<Equipment, Void>> cellFactoryUpdate = new Callback<TableColumn<Equipment, Void>, TableCell<Equipment, Void>>() {
             @Override
@@ -238,9 +238,42 @@ public class EquipmentController extends AccessProviderController implements Ini
             }
         };
 
-        colBtnUpdate.setCellFactory(cellFactoryUpdate);
+        Callback<TableColumn<Equipment, Void>, TableCell<Equipment, Void>> cellFactoryDelete = new Callback<TableColumn<Equipment, Void>, TableCell<Equipment, Void>>() {
+            @Override
+            public TableCell<Equipment, Void> call(final TableColumn<Equipment, Void> param) {
+                final TableCell<Equipment, Void> cell = new TableCell<Equipment, Void>() {
 
-        tableView.getColumns().addAll(colBtnUpdate);
+                    private final Button btnDelete = new Button("Excluir");
+
+                    {
+                        btnDelete.setOnAction((ActionEvent event) -> {
+                            Equipment data = getTableView().getItems().get(getIndex());
+                            try {
+                                onClickSelectForDelete(data);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btnDelete);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        colBtnUpdate.setCellFactory(cellFactoryUpdate);
+        colBtnDelete.setCellFactory(cellFactoryDelete);
+
+        tableView.getColumns().addAll(colBtnUpdate, colBtnDelete);
     }
 
     private void onClickSelectForUpdate(Equipment _equipment){
@@ -252,6 +285,11 @@ public class EquipmentController extends AccessProviderController implements Ini
         inputContract.getSelectionModel().select(equipment.getContract());
         inputClient.getSelectionModel().select(equipment.getContract().getClient());
         goToTab(1);
+    }
+
+    private void onClickSelectForDelete(Equipment _equipament) throws Exception {
+        equipmentDao.delete(_equipament);
+        updateTable();
     }
 
     @FXML

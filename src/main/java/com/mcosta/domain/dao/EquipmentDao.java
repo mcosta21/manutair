@@ -40,6 +40,9 @@ public class EquipmentDao implements Dao {
 
     @Override
     public void delete(Object object) throws Exception{
+        Equipment equipment = (Equipment) object;
+        equipment.setIsDeleted(true);
+        persist();
     }
 
     @Override
@@ -52,8 +55,8 @@ public class EquipmentDao implements Dao {
         equipments = (Set<Equipment>) xs.fromXML(file);
 
         List<Equipment> items = new ArrayList<>();
-        for(Equipment c : equipments){
-            items.add(c);
+        for(Equipment e : equipments){
+            if(!e.getIsDeleted()) items.add(e);
         }
 
         return items;
@@ -68,7 +71,7 @@ public class EquipmentDao implements Dao {
 
         List<Equipment> items = new ArrayList<>();
         for(Equipment e : (Set<Equipment>) xs.fromXML(file)){
-            if(e.getContract().getIdContract().equals(idContract)) items.add(e);
+            if(!e.getIsDeleted() && e.getContract().getIdContract().equals(idContract)) items.add(e);
         }
 
         return items;

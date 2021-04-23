@@ -23,6 +23,9 @@ public class Equipment {
     private String serialNumber;
 
     @Getter @Setter
+    private Boolean isDeleted = false;
+
+    @Getter @Setter
     private Contract contract;
 
     public Equipment(String description, String brand, String model, String serialNumber, Contract contract) {

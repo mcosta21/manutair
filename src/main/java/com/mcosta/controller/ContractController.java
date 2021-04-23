@@ -13,20 +13,13 @@ import com.mcosta.domain.dao.EquipmentDao;
 import com.mcosta.domain.model.*;
 import com.mcosta.domain.validator.EquipmentValidator;
 import com.mcosta.util.AccessProvider;
-import com.mcosta.util.ManagerWindow;
 import com.mcosta.util.MessageAlert;
-import com.thoughtworks.xstream.converters.basic.StringConverter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -41,8 +34,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class ContractController extends AccessProviderController implements Initializable {
@@ -265,9 +256,6 @@ public class ContractController extends AccessProviderController implements Init
     private void addButtonsToTable() {
         TableColumn<Contract, Void> colBtnUpdate = new TableColumn();
         colBtnUpdate.setMinWidth(50);
-        TableColumn<Contract, Void> colBtnDelete = new TableColumn();
-        colBtnDelete.setMinWidth(50);
-
 
         Callback<TableColumn<Contract, Void>, TableCell<Contract, Void>> cellFactoryUpdate = new Callback<TableColumn<Contract, Void>, TableCell<Contract, Void>>() {
             @Override
